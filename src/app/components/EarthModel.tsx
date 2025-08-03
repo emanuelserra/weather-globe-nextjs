@@ -1,14 +1,8 @@
-"use client";
-
 import { useGLTF } from "@react-three/drei";
-import { useRef } from "react";
+import { JSX, useRef } from "react";
 import * as THREE from "three";
 
-interface EarthModelProps {
-  [key: string]: any;
-}
-
-export function EarthModel(props: EarthModelProps) {
+export function EarthModel(props: JSX.IntrinsicElements["group"]) {
   const group = useRef<THREE.Group>(null);
   const { scene } = useGLTF("/earth.glb");
 
