@@ -3,20 +3,8 @@
 import { useState } from "react";
 import { Html } from "@react-three/drei";
 import * as THREE from "three";
+import { type WeatherData } from "./weatherService";
 
-// Definiamo i tipi direttamente qui per evitare errori di import
-interface WeatherData {
-  city: string;
-  country: string;
-  temperature: number;
-  description: string;
-  humidity: number;
-  windSpeed: number;
-  lat: number;
-  lon: number;
-}
-
-// Funzione per convertire coordinate geografiche in 3D
 function latLonTo3D(
   lat: number,
   lon: number,
@@ -44,11 +32,11 @@ interface WeatherTooltipProps {
 }
 
 function getTemperatureColor(temp: number): string {
-  if (temp < 0) return "#00BFFF"; // Blu ghiaccio
-  if (temp < 10) return "#4169E1"; // Blu
-  if (temp < 20) return "#32CD32"; // Verde
-  if (temp < 30) return "#FFD700"; // Giallo
-  return "#FF4500"; // Arancione/Rosso
+  if (temp < 0) return "#00BFFF";
+  if (temp < 10) return "#4169E1";
+  if (temp < 20) return "#32CD32";
+  if (temp < 30) return "#FFD700";
+  return "#FF4500";
 }
 
 function WeatherPoint({ weather, onClick }: WeatherPointProps) {

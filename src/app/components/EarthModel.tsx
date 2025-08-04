@@ -1,15 +1,24 @@
+"use client";
+
 import { useGLTF } from "@react-three/drei";
-import { JSX, useRef } from "react";
-import * as THREE from "three";
+import { JSX, Suspense } from "react";
+function EarthGLTF(props: JSX.IntrinsicElements["group"]) {
+  const { scene } = useGLTF("/earth.glb");
+  return <primitive object={scene} {...props} />;
+}
 
 export function EarthModel(props: JSX.IntrinsicElements["group"]) {
-  const group = useRef<THREE.Group>(null);
-  const { scene } = useGLTF("/earth.glb");
-
   return (
-    <group ref={group} {...props}>
-      <primitive object={scene} />
-    </group>
+    <Suspense
+      fallback={
+        <mesh>
+          <sphereGeometry args={[1.5, 32, 32]} />
+          <meshStandardMaterial color="gray" />
+        </mesh>
+      }
+    >
+      <EarthGLTF {...props} />
+    </Suspense>
   );
 }
 
